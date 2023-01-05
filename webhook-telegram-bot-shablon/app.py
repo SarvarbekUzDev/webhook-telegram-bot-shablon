@@ -18,7 +18,8 @@ def index():
             dp.send_message(
                 chat_id=get_json["message"]["chat"]["id"],
                 text=f"Hello {get_json['message']['chat']['first_name']}",
-                reply_markup=reply_keyboards.btn_markup
+                reply_markup=reply_keyboards.btn_markup,
+                variable_name="btn_markup"
             )
         # State
         if dp.message_handler(request, text="State🚥"):
