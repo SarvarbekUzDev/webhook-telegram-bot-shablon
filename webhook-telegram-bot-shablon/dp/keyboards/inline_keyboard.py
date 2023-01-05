@@ -20,8 +20,10 @@ class InlineKeyboardMarkup:
     ReplyKeyboardMarkup
     """
     data_ = {}
-    def __init__(self) -> None:
+    def __init__(self, variable_name) -> None:
+        self.variable_name = variable_name
         self.data_ = InlineKeyboardMarkup.data_
+        self.data_[f"{variable_name}"] = {}
 
     # Add Button
     def add(self, *data:dict) -> dict:
@@ -37,5 +39,5 @@ class InlineKeyboardMarkup:
                 list_.append([i])
 
         
-        self.data_["inline_keyboard"] = list_
+        self.data_[f"{self.variable_name}"]["inline_keyboard"] = list_
         return self.data_
