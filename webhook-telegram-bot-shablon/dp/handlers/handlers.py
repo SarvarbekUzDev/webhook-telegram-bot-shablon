@@ -25,22 +25,22 @@ class Sends:
         self.token = token
             
     # Send Message
-    def send_message(self, chat_id, text, reply_markup=None):
+    def send_message(self, chat_id, text, reply_markup=None, variable_name=None):
         method = "sendMessage"
         url_req = "https://api.telegram.org/bot" + self.token + f"/{ method }"
         data =  {"chat_id":str(chat_id), "text":text, "parse_mode":"HTML",
-                    "reply_markup": json.dumps(reply_markup if reply_markup else {})}
+                    "reply_markup": json.dumps(reply_markup[f"{variable_name}"] if reply_markup else {})}
         results = requests.post(url_req, data=data)
 
         return results
 
 
     # Send Photo
-    def send_photo(self, chat_id, photo, caption=None, reply_markup=None):
+    def send_photo(self, chat_id, photo, caption=None, reply_markup=None, variable_name=None):
         method = "sendPhoto"
         url_req = 'https://api.telegram.org/bot' + self.token + f'/{ method }'
         data = {"chat_id":chat_id, "photo":photo, "caption":caption, "parse_mode":"HTML",
-                "reply_markup":json.dumps(reply_markup if reply_markup else {})}
+                "reply_markup":json.dumps(reply_markup[f"{variable_name}"] if reply_markup else {})}
 
         results = requests.post(url_req, data=data)
 
@@ -48,11 +48,11 @@ class Sends:
 
 
     # Send Video
-    def send_video(self, chat_id, video, caption=None, reply_markup=None):
+    def send_video(self, chat_id, video, caption=None, reply_markup=None, variable_name=None):
         method = "sendVideo"
         url_req = 'https://api.telegram.org/bot' + self.token + f'/{ method }'
         data = {"chat_id":chat_id, "video":video, "caption":caption, "parse_mode":"HTML",
-                "reply_markup":json.dumps(reply_markup if reply_markup else {})}
+                "reply_markup":json.dumps(reply_markup[f"{variable_name}"] if reply_markup else {})}
 
         results = requests.post(url_req, data=data)
 
@@ -60,11 +60,11 @@ class Sends:
 
 
     # Send Audio
-    def send_audio(self, chat_id, audio, caption=None, reply_markup=None):
+    def send_audio(self, chat_id, audio, caption=None, reply_markup=None, variable_name=None):
         method = "sendAudio"
         url_req = 'https://api.telegram.org/bot' + self.token + f'/{ method }'
         data = {"chat_id":chat_id, "audio":audio, "caption":caption, "parse_mode":"HTML",
-                "reply_markup":json.dumps(reply_markup if reply_markup else {})}
+                "reply_markup":json.dumps(reply_markup[f"{variable_name}"] if reply_markup else {})}
 
         results = requests.post(url_req, data=data)
 
@@ -72,11 +72,11 @@ class Sends:
 
 
     # Send Document
-    def send_document(self, chat_id, document, caption=None, reply_markup=None):
+    def send_document(self, chat_id, document, caption=None, reply_markup=None, variable_name=None):
         method = "sendDocument"
         url_req = 'https://api.telegram.org/bot' + self.token + f'/{ method }'
         data = {"chat_id":chat_id, "document":document, "caption":caption, "parse_mode":"HTML",
-                "reply_markup":json.dumps(reply_markup if reply_markup else {})}
+                "reply_markup":json.dumps(reply_markup[f"{variable_name}"] if reply_markup else {})}
 
         results = requests.post(url_req, data=data)
 
@@ -84,14 +84,14 @@ class Sends:
 
 
     # Send Media
-    def send_media(self, chat_id, media, reply_markup=None):
+    def send_media(self, chat_id, media, reply_markup=None, variable_name=None):
         method = "sendMediaGroup"
         url_req = 'https://api.telegram.org/bot' + self.token + f'/{ method }'
 
         # [{"type":"photo","media":media, "caption":caption}]
         media = json.dumps(media)
         data = {"chat_id":chat_id, "media":media, "parse_mode":"HTML",
-                "reply_markup":json.dumps(reply_markup if reply_markup else {})}
+                "reply_markup":json.dumps(reply_markup[f"{variable_name}"] if reply_markup else {})}
         results = requests.post(url_req, data=data)
 
         return results
