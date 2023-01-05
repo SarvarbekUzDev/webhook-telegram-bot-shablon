@@ -15,9 +15,11 @@ class ReplyKeyboardMarkup:
     ReplyKeyboardMarkup
     """
     data_ = {}
-    def __init__(self, resize_keyboard=True) -> None:
+    def __init__(self, variable_name, resize_keyboard=True) -> None:
         self.resize_keyboard = resize_keyboard
+        self.variable_name = variable_name
         self.data_ = ReplyKeyboardMarkup.data_
+        self.data_[f"{variable_name}"] = {}
 
     # Add Button
     def add(self, *data:dict) -> dict:
@@ -33,6 +35,6 @@ class ReplyKeyboardMarkup:
                 list_.append([i])
 
         
-        self.data_["keyboard"] = list_
-        self.data_["resize_keyboard"] = self.resize_keyboard
+        self.data_[f"{self.variable_name}"]["keyboard"] = list_
+        self.data_[f"{self.variable_name}"]["resize_keyboard"] = self.resize_keyboard
         return self.data_
